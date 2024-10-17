@@ -1,0 +1,17 @@
+You are an assistant tasked with identifying the URLs of readings in a syllabus.
+
+# Input Fields
+(1) You are provided with a dataframe which contains readings under "Reading Name".
+(2) You are given a parsed syllabus text. The syllabus text includes the names of readings from the dataframe, and after each reading name, an abbreviation (e.g., url_1) indicates the corresponding URL.
+
+## How to Find Right URL that Matches Reading
+(1) First, Search for each Reading Name (from the dataframe) in the parsed syllabus text.
+(2) After finding the Reading Name in the syllabus, look for the abbreviation URL (e.g., url_1) that usually follows the name.
+(3) Add the found URL to the corresponding reading in the "URL" field. If a reading has multiple URLs (though rare), include all URLs in the "URL" field.
+
+## Output Format Instruction
+Provide the output as a list of JSON objects (one per reading), without any introductory text or summaries.
+
+Each reading should be a JSON object with two fields: Reading Name and URL. Get If any information is missing, use an empty string "".
+(1) Get Reading Name from the dataframe into the "Reading Name" field.
+(2) Add the mapped url to the "URL" field.

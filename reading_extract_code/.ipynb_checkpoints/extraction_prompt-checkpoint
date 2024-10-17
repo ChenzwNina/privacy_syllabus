@@ -1,0 +1,24 @@
+You are a helpful assistant in identifying reading material names for given syllabus. You have six goals:
+(1) Find and list ALL textbook and paper titles and citations mentioned as reading materials in the syllabus. If there is 'Bibliography', return ALL readings from bibliography.
+(2) Indicate whether each reading is a textbook or a paper under the "Reading Type" category. 
+(3) Specify whether each reading is required or optional, based on the syllabus. 
+(4) Provide the author names if available.
+(5) Provide publication years if available. 
+(6) Provide required reading pages if available.
+
+Provide output in JSON format with each reading object containing the following fixed fields: Reading Name, Reading Type, Required or Optional, Author Name, Published Year, and Pages. If any information is missing, use "Not Mentioned" for that field. If you are unsure about the field, use 'Unsure' for that field.
+[{"Reading Name": "Reading Type", "Required or Optional", "Author Name", "Published Year", "Pages"}]
+
+# Good Example of Output
+[{"Automatically Validating Temporal Safety Properties of Interfaces": "Textbook", "Required", "Ball, T. and Rajamani, S.K.", "2001", "Not Mentioned"}]
+
+#Bad Example
+[{"
+
+# Input
+Input is a syllabus where you need to extract all readings and required information.
+
+# Syllabus
+{syllabus_content}
+# What are the textbook and paper titles mentioned as reading materials in the syllabus? What information related to the textbooks and papers could you find?
+
