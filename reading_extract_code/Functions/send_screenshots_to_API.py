@@ -18,7 +18,7 @@ def count_images_in_folder(class_folder, class_id, extensions=[".png"]):
 
 # Read API prompt
 def read_prompt():
-    file = open('/Users/ninachen/Desktop/reading_extract_code/Prompts/Find Reading Prompt image.txt','r')
+    file = open('/Users/ninachen/Desktop/privacy_syllabus/reading_extract_code/Prompts/Find Reading Prompt image.txt','r')
     content = file.read()
     file.close()
     return content
@@ -59,6 +59,8 @@ def message_sent_API(image_start, image_end, class_folder, class_id):
 
 
 def api_process_images(original_message, prompt_content):
+
+    print("-------API starts extracting readings by images---------")
     results = []
     client = OpenAI(api_key = "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")
     response = client.chat.completions.create(
@@ -68,13 +70,18 @@ def api_process_images(original_message, prompt_content):
             {"role": "user", "content": original_message}]
     )
     results = response.choices[0].message.content
-    token_used  = response.usage.total_tokens
-    return results, token_used
+
+    # Calculate tokens used
+    prompt_token_used = response.usage.prompt_tokens
+    completion_token_used = response.usage.completion_tokens
+
+    return results, prompt_token_used, completion_token_used
 
 # Send all screenshots to API everytime
 def send_images(class_folder, class_id, batch_size):
 
-    total_tokens = 0
+    total_prompt_token = 0
+    total_completion_token = 0
 
     # Count number of images
     image_count = count_images_in_folder(class_folder, class_id)
@@ -96,21 +103,19 @@ def send_images(class_folder, class_id, batch_size):
         if image_end > image_id_total:
             image_end = image_count
 
-        print(f"image_start + {image_start}")
-        print(f"image_end + {image_end}")
-            
+        print(f"Start processing image: image.{image_start} - image.{image_end}")
+
         # Generate messages for the screenshots
         original_message = message_sent_API(image_start, image_end, class_folder, class_id)
 
         # Get results for the screenshots
-        results, tokens_single = api_process_images(original_message, prompt_content)
+        results, prompt_token_used, completion_token_used = api_process_images(original_message, prompt_content)
 
         # Append result to full results
         full_result.append(results)
 
         # Count total tokens used
-        total_tokens += tokens_single
-        print(f"Current image input uses {tokens_single} tokens")
-    
-    print(f"Initial API image extraction uses {total_tokens} tokens")
-    return full_result, total_tokens
+        total_prompt_token += prompt_token_used
+        total_completion_token += completion_token_used
+
+    return full_result, total_prompt_token, total_completion_token

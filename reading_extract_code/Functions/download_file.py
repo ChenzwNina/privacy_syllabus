@@ -35,7 +35,7 @@ def google_access(url, class_folder, class_id):
 # Download the web PDF and save it locally.
 
 def download_pdf(url, class_folder, class_id):
-    response = requests.get(url)
+    response = requests.get(url, verify=False)
     if response.status_code == 200:
         # Create the directory if it doesn't exist
         if not os.path.exists(class_folder):
@@ -48,7 +48,7 @@ def download_pdf(url, class_folder, class_id):
         with open(output_path, 'wb') as f:
             f.write(response.content)
             
-        print(f"PDF successfully downloaded and saved to {local_path}")
+        print(f"PDF successfully downloaded and saved to { output_path}")
     else:
         output_path = "error"
         print("PDF fails to be downloaded")

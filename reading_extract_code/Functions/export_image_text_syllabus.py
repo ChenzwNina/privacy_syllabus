@@ -7,8 +7,6 @@ import re
 def export_reading_from_image_text(temp_results, class_folder, class_id, url_mappings):
     final_results = []
 
-    pdb.set_trace()
-
     for i in temp_results:
         match = re.search(r'```json(.*?)```', i, re.DOTALL)
         if match:

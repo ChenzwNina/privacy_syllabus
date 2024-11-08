@@ -5,7 +5,7 @@ client = OpenAI(api_key= "sk-proj-K6vCVii5b8pXCFOZrRVUrbkCvmdaxQjyqyh5iQr5YS3x_V
 
 # Load system_prompt from local files
 def load_system_prompt():
-    file_path = "/Users/ninachen/Desktop/reading_extract_code/Prompts/Find Reading Prompt text.txt"
+    file_path = "/Users/ninachen/Desktop/privacy_syllabus/reading_extract_code/Prompts/Find Reading Prompt text.txt"
 
     # Open the file in read mode and load the content into a variable
     with open(file_path, 'r') as file:
@@ -31,7 +31,10 @@ def api_syllabus_classification(syllabus_content, max_words):
     
     results= []
 
-    token_used = 0
+    total_prompt_token = 0
+    total_completion_token = 0
+
+    print("-------API starts extracting readings by parsed text---------")
 
     for chunk in chunks:
     #Run GPT-4 for the first round
@@ -44,7 +47,12 @@ def api_syllabus_classification(syllabus_content, max_words):
             temperature = 0
             )
         results.append(response.choices[0].message.content)
-        sig_tokens = response.usage.total_tokens
-        token_used += sig_tokens
 
-    return results, chunk_number, token_used
+        text_prompt_token_used = response.usage.prompt_tokens
+        text_completion_token_used = response.usage.completion_tokens
+
+        total_prompt_token += text_prompt_token_used
+        total_completion_token += text_completion_token_used
+
+
+    return results, chunk_number, total_prompt_token, total_completion_token

@@ -7,7 +7,6 @@ from Functions.get_content_with_url import extract_text_from_pdf_with_spaces, pa
 def get_content_and_url(url, class_folder, class_id):
     url_mappings = {}
     reason = ""
-    print(url)
     
     if "google" in url.lower() or ".pdf" in url.lower():
         if "google" in url.lower():

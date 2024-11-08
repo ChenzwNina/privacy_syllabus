@@ -14,27 +14,34 @@ You have two tasks.
 (1) Make sure to capture readings from the entire screenshot, starting from the top to the bottom, and include all sections of the syllabus.
 (2) Screenshots are taken with a 50-pixel overlap. If any text is cut off in a screenshot, refer to the previous image to recover the missing part.
 
-## How to Identify Readings
+
+## Definition of Reading Material
+Only consider a document as "reading material" if it is educational or course-related, such as a textbook chapter, research article, or scholarly paper intended to deepen understanding of course concepts.
+
+## Exclusion Criteria
+(1) Exclude documents like policy statements, codes of conduct, accommodations, grade point averages, and institutional or administrative information from being classified as reading material. These documents are typically informational and not directly used for learning course content.
+
+## Reading Identifications
+(1) The document should have keywords related to learning, research, studies, guide, law, or chapters.
+(2) Readings are typically found after sections named “Reading”, "Discussion", "Additional Material", "Supplement Materials", "Optional", "Option Reading", "Textbook" etc.
+(3) Sometimes readings uses abbreviations in the body text, but has full citations in the bibliography section of the syllabus.
+(4) If only chapter information is found, do not include the weekly class topic in the reading entry. It's important to differentiate between the weekly class topic and the reading material.
+
+## Reading Common Formats
 Readings may appear in different formats.
 (1) Full citation: Includes the title, author(s), and year.
 (2) Partial citation: Includes only one or more elements. For example: 
-Just the title, such as "Federal Law";
+Just the title but with a url, such as "Federal Law (url_1)";
 A title with published year, such as "Federal Law, 8 S. Ct. 2206 (2018)".
 A title with author name, such as, "The right to privacy. George Brown".
 
-## Where Readings are Typically Found
-(1) After the word, section named “Reading”, "Discussion", "Additional Material", "Supplement Materials", "Optional", "Option Reading", "Skim" etc.
-(2) Under sections like "Textbook" or "Class Calendar."
-(3) In the bibliography section of the syllabus.
-(4) Readings can also be found in places not mentioned above.
+## Examples of Reading Materials
+(1) Considered as Reading: "Introduction to Psychology: Chapter 1," "The Impact of Social Media on Youth," or "Research Methods in Psychology."
+(2) Not Considered as Reading: "Code of Student Conduct", "UVM’s Code of Academic Integrity".
 
 ## Output Format Instruction
-Provide the output as a list of JSON objects with no introductory text or summaries. 
-
-Each reading should be a JSON object with four fields: Reading Name, Author Name, Published Year and Page Numbers to Read. If any information is missing, use an empty string "". Do not include chapter or page details in the "Reading Name"; instead, place them under "Page Numbers" to Read.
-
-Enclose **ALL** fields in double quotes.
-
-If you can't find all information, record the available one in the relevant fields and use string "" for unavailable information.
-
-If no reading is found in the input screenshots, return JSON object with four objects and use string "" for all fields.
+(1) Provide the output as a list of JSON objects with no introductory text or summaries. 
+(2) Each reading should be a JSON object with four fields: Reading Name, Author Name, Published Year and Page Numbers to Read. If any information is missing, use an empty string "". Do not include chapter or page details in the "Reading Name"; instead, place them under "Page Numbers" to Read.
+(3) Enclose **ALL** fields in double quotes.
+(4) If you can't find all information, record the available one in the relevant fields and use string "" for unavailable information.
+(5) If no reading is found in the input screenshots, return JSON object with four objects and use string "" for all fields.

@@ -9,6 +9,7 @@ def process_first_api_result(temp_results, class_folder, class_id):
     final_results = []
     total_list_number = len(temp_results)
 
+
     for item in range(total_list_number):
         if temp_results[item]is None:
             print("Found a NoneType object.")

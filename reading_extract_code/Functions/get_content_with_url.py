@@ -58,6 +58,11 @@ def parse_website_with_mappings(url):
     except requests.exceptions.SSLError:
         modified_content = "error"
         reason = "SSL error"
+    
+    except requests.exceptions.HTTPError:
+        modified_content = "error"
+        reason = "HTTP error"
+
 
     except requests.exceptions.RequestException:
         modified_content = "error"

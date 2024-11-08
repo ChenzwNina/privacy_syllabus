@@ -12,11 +12,11 @@ def export_reading_syllabus(results, class_id, class_folder, url_mappings, chunk
         df = pd.DataFrame(reading)
         total_df = pd.concat([total_df, df], ignore_index=True) 
 
-    # #Count the number of rows in the DataFrame
-    # num_rows = len(total_df)
+    #Count the number of rows in the DataFrame
+    num_rows = len(total_df)
     
     # #Add class_id in the new column
-    # total_df['Class ID'] = [f"{class_id}"] * num_rows
+    total_df.insert(0, "Class Id", class_id, True)
 
     # Replace URL abbreviations with actual URLs from the url_mappings dictionary, handling multiple URLs
     total_df['URL'] = total_df['URL'].apply(lambda x: ', '.join([url_mappings.get(url.strip(), url.strip()) for url in x.split(',')]))
